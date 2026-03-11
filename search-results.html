@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados: GTA VI - GameVault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gv-bg': '#0a0a0b',
+            'gv-card': '#141416',
+            'gv-border': '#1f1f23',
+            'gv-accent': '#06b6d4',
+            'gv-accent-hover': '#22d3ee',
+            'gv-steam': '#1b2838',
+            'gv-steam-hover': '#2a475e',
+            'gv-muted': '#71717a',
+            'gv-surface': '#18181b',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-gv-bg text-white min-h-screen">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-gv-bg/95 backdrop-blur-md border-b border-gv-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-4">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
+          <div class="w-8 h-8 bg-gv-accent rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M21 6H3a1 1 0 00-1 1v10a1 1 0 001 1h18a1 1 0 001-1V7a1 1 0 00-1-1zM6 14.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5-2.5a1 1 0 110-2 1 1 0 010 2zm3 0a1 1 0 110-2 1 1 0 010 2zm4 2.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-white">GameVault</span>
+        </a>
+
+        <!-- Search Bar con texto "GTA VI" -->
+        <div class="flex-1 max-w-2xl mx-4">
+          <div class="relative">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-muted" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" value="GTA VI" placeholder="Buscar videojuegos, generos, plataformas..."
+              class="w-full bg-gv-surface border border-gv-border rounded-xl pl-12 pr-4 py-3 text-sm text-white placeholder:text-gv-muted focus:outline-none focus:ring-2 focus:ring-gv-accent focus:border-transparent transition-all">
+          </div>
+        </div>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Wishlist -->
+          <a href="profile.html"
+            class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gv-surface transition-colors group">
+            <svg class="w-5 h-5 text-gv-muted group-hover:text-gv-accent transition-colors" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span class="hidden sm:inline text-sm text-gv-muted group-hover:text-white transition-colors">Mi
+              Lista</span>
+            <span class="bg-gv-accent text-gv-bg text-xs font-bold px-2 py-0.5 rounded-full">12</span>
+          </a>
+
+          <!-- Profile -->
+          <a href="profile.html"
+            class="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-gv-accent/50 transition-all">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=face"
+              alt="Avatar del usuario" class="w-9 h-9 rounded-full object-cover border-2 border-gv-border">
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+
+    <!-- Cabecera de Resultados -->
+    <div class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">
+        Resultados para: <span class="text-gv-accent">'GTA VI'</span>
+      </h1>
+      <p class="text-gv-muted">Se encontraron 8 coincidencias</p>
+    </div>
+
+    <!-- Barra de Filtros y Orden -->
+    <div class="flex flex-wrap items-center gap-3 mb-8 p-4 bg-gv-surface border border-gv-border rounded-xl">
+      <!-- Plataforma -->
+      <div class="relative">
+        <select
+          class="appearance-none bg-gv-card border border-gv-border rounded-lg px-4 py-2.5 pr-10 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gv-accent cursor-pointer hover:border-gv-accent/50 transition-colors">
+          <option>Todas las plataformas</option>
+          <option>PC</option>
+          <option>PlayStation 5</option>
+          <option>PlayStation 4</option>
+          <option>Xbox Series X</option>
+          <option>Xbox One</option>
+          <option>Nintendo Switch</option>
+        </select>
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+
+      <!-- Genero -->
+      <div class="relative">
+        <select
+          class="appearance-none bg-gv-card border border-gv-border rounded-lg px-4 py-2.5 pr-10 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gv-accent cursor-pointer hover:border-gv-accent/50 transition-colors">
+          <option>Todos los generos</option>
+          <option>Accion</option>
+          <option>Aventura</option>
+          <option>RPG</option>
+          <option>Shooter</option>
+          <option>Deportes</option>
+          <option>Carreras</option>
+        </select>
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+
+      <!-- Ordenar por -->
+      <div class="relative ml-auto">
+        <select
+          class="appearance-none bg-gv-card border border-gv-border rounded-lg px-4 py-2.5 pr-10 text-sm text-white focus:outline-none focus:ring-2 focus:ring-gv-accent cursor-pointer hover:border-gv-accent/50 transition-colors">
+          <option>Ordenar por: Relevancia</option>
+          <option>Mayor nota</option>
+          <option>Menor nota</option>
+          <option>Fecha de lanzamiento (reciente)</option>
+          <option>Fecha de lanzamiento (antiguo)</option>
+          <option>Nombre A-Z</option>
+        </select>
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Grid de Resultados -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 mb-12">
+
+      <!-- Card 1: GTA VI -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=533&fit=crop" alt="GTA VI"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">
+              Grand Theft Auto VI</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2025</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">9.8</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: GTA V -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1493711662062-fa541f7f76cf?w=400&h=533&fit=crop" alt="GTA V"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">
+              Grand Theft Auto V</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2013</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">9.7</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: GTA IV -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=533&fit=crop" alt="GTA IV"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">
+              Grand Theft Auto IV</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2008</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">9.5</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4: GTA San Andreas -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&h=533&fit=crop"
+              alt="GTA San Andreas"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">GTA:
+              San Andreas</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2004</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">9.6</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: GTA Vice City -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=533&fit=crop"
+              alt="GTA Vice City"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">GTA:
+              Vice City</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2002</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">9.3</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6: GTA III -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?w=400&h=533&fit=crop" alt="GTA III"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">
+              Grand Theft Auto III</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2001</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">9.1</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 7: GTA Trilogy -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=400&h=533&fit=crop" alt="GTA Trilogy"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">GTA:
+              The Trilogy</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2021</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">6.2</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 8: GTA Online -->
+      <article
+        class="group bg-gv-card border border-gv-border rounded-xl overflow-hidden card-hover transition-all duration-300">
+        <a href="game-detail.html" class="block">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=400&h=533&fit=crop" alt="GTA Online"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          </div>
+        </a>
+        <div class="p-4">
+          <a href="game-detail.html">
+            <h3 class="font-semibold text-white text-sm mb-1 truncate group-hover:text-gv-accent transition-colors">GTA
+              Online</h3>
+          </a>
+          <p class="text-gv-muted text-xs mb-3">2013</p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-1.5 mb-3">
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            <span class="text-white text-sm font-medium">8.4</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2">
+            <a href="#"
+              class="flex-1 flex items-center justify-center gap-1.5 bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Steam
+            </a>
+            <button
+              class="p-2 rounded-lg bg-gv-surface hover:bg-red-500/20 border border-gv-border hover:border-red-500/50 transition-all group/heart">
+              <svg class="w-4 h-4 text-gv-muted group-hover/heart:text-red-500 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Paginacion -->
+    <nav class="flex items-center justify-center gap-2">
+      <!-- Anterior -->
+      <button
+        class="flex items-center gap-1.5 px-4 py-2 bg-gv-surface border border-gv-border rounded-lg text-gv-muted hover:text-white hover:border-gv-accent/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span class="text-sm">Anterior</span>
+      </button>
+
+      <!-- Numeros de pagina -->
+      <div class="flex items-center gap-1">
+        <button
+          class="w-10 h-10 flex items-center justify-center bg-gv-accent text-gv-bg font-semibold rounded-lg text-sm">1</button>
+        <button
+          class="w-10 h-10 flex items-center justify-center bg-gv-surface border border-gv-border rounded-lg text-sm text-gv-muted hover:text-white hover:border-gv-accent/50 transition-colors">2</button>
+        <button
+          class="w-10 h-10 flex items-center justify-center bg-gv-surface border border-gv-border rounded-lg text-sm text-gv-muted hover:text-white hover:border-gv-accent/50 transition-colors">3</button>
+      </div>
+
+      <!-- Siguiente -->
+      <button
+        class="flex items-center gap-1.5 px-4 py-2 bg-gv-surface border border-gv-border rounded-lg text-gv-muted hover:text-white hover:border-gv-accent/50 transition-colors">
+        <span class="text-sm">Siguiente</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </nav>
+
+  </main>
+
+</body>
+
+</html>

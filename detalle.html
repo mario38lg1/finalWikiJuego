@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk 2077 - GameVault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gv-bg': '#0a0a0b',
+            'gv-card': '#141416',
+            'gv-border': '#2a2a2e',
+            'gv-accent': '#00d4aa',
+            'gv-accent-hover': '#00f5c4',
+            'gv-steam': '#1b2838',
+            'gv-steam-hover': '#2a475e',
+            'gv-text': '#e5e5e5',
+            'gv-text-muted': '#8b8b8b',
+            'gv-yellow': '#fbbf24',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #2a2a2e #0a0a0b;
+    }
+
+    .star-rating input[type="radio"] {
+      display: none;
+    }
+
+    .star-rating label {
+      cursor: pointer;
+      font-size: 2rem;
+      color: #3a3a3e;
+      transition: color 0.2s;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover~label,
+    .star-rating input[type="radio"]:checked~label {
+      color: #fbbf24;
+    }
+
+    .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+
+<body class="bg-gv-bg text-gv-text min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-gv-bg/95 backdrop-blur-md border-b border-gv-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-gv-accent to-emerald-600 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-white">GameVault</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-2xl mx-8">
+          <div class="relative">
+            <input type="text" placeholder="Buscar juegos, generos, plataformas..."
+              class="w-full bg-gv-card border border-gv-border rounded-full py-2.5 pl-12 pr-4 text-sm text-gv-text placeholder-gv-text-muted focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-text-muted" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="flex items-center gap-4">
+          <!-- Wishlist -->
+          <a href="#"
+            class="relative flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span class="hidden sm:inline text-sm">Mi Lista</span>
+            <span
+              class="absolute -top-1 -right-1 sm:-top-1 sm:right-8 w-5 h-5 bg-gv-accent text-gv-bg text-xs font-bold rounded-full flex items-center justify-center">3</span>
+          </a>
+          <!-- User Avatar -->
+          <button
+            class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold text-sm ring-2 ring-gv-border hover:ring-gv-accent transition-all">
+            JP
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Blurred Background -->
+  <section class="pt-16 relative">
+    <!-- Blurred Background Image -->
+    <div class="absolute inset-0 h-[500px] overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80" alt="Cyberpunk 2077 Background"
+        class="w-full h-full object-cover blur-sm scale-105">
+      <div class="absolute inset-0 bg-gradient-to-b from-gv-bg/60 via-gv-bg/80 to-gv-bg"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-gv-bg/90 via-transparent to-gv-bg/60"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <!-- Game Cover -->
+        <div class="flex-shrink-0">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&h=450&fit=crop"
+            alt="Cyberpunk 2077 Cover"
+            class="w-56 md:w-64 rounded-xl shadow-2xl shadow-black/50 border border-gv-border/50">
+        </div>
+
+        <!-- Game Info -->
+        <div class="flex-1 pt-4">
+          <!-- Title and Year -->
+          <div class="mb-4">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2 tracking-tight">Cyberpunk 2077</h1>
+            <p class="text-xl text-gv-text-muted">2020</p>
+          </div>
+
+          <!-- Genre Tags -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span
+              class="px-3 py-1 bg-gv-accent/20 text-gv-accent text-sm font-medium rounded-full border border-gv-accent/30">RPG</span>
+            <span
+              class="px-3 py-1 bg-purple-500/20 text-purple-400 text-sm font-medium rounded-full border border-purple-500/30">Accion</span>
+            <span
+              class="px-3 py-1 bg-blue-500/20 text-blue-400 text-sm font-medium rounded-full border border-blue-500/30">Mundo
+              Abierto</span>
+            <span
+              class="px-3 py-1 bg-pink-500/20 text-pink-400 text-sm font-medium rounded-full border border-pink-500/30">Ciencia
+              Ficcion</span>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="flex flex-wrap items-center gap-4">
+            <!-- Rating Display -->
+            <div
+              class="flex items-center gap-2 bg-gv-card/80 backdrop-blur px-4 py-2 rounded-xl border border-gv-border">
+              <svg class="w-6 h-6 text-gv-yellow" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              <span class="text-2xl font-bold text-white">4.8</span>
+              <span class="text-gv-text-muted text-sm">/5</span>
+            </div>
+
+            <!-- Add to List Button -->
+            <button
+              class="flex items-center gap-2 bg-gv-card hover:bg-gv-border text-white px-5 py-2.5 rounded-xl border border-gv-border hover:border-gv-accent transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+              Anadir a mi Lista
+            </button>
+
+            <!-- Buy on Steam Button -->
+            <a href="#"
+              class="flex items-center gap-2 bg-gv-steam hover:bg-gv-steam-hover text-white px-6 py-2.5 rounded-xl transition-all font-medium shadow-lg">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95 0-5.52-4.48-10-10-10z" />
+              </svg>
+              Comprar en Steam
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+
+      <!-- Left Column (70%) -->
+      <div class="lg:w-[70%] space-y-8">
+
+        <!-- Synopsis -->
+        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border">
+          <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-gv-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Sinopsis
+          </h2>
+          <p class="text-gv-text leading-relaxed">
+            Cyberpunk 2077 es un RPG de accion y aventura de mundo abierto ambientado en Night City, una megalopolis
+            obsesionada con el poder, el glamour y las modificaciones corporales. Interpretas a V, un mercenario en
+            busca de un implante unico que otorga la inmortalidad. Personaliza el ciberware, las habilidades y el estilo
+            de juego de tu personaje mientras exploras una vasta ciudad donde tus decisiones moldean la historia y el
+            mundo que te rodea.
+          </p>
+          <p class="text-gv-text leading-relaxed mt-4">
+            El juego ofrece una experiencia inmersiva con graficos de ultima generacion, una narrativa profunda con
+            multiples finales, y un sistema de combate que combina tiroteos, hackeo y combate cuerpo a cuerpo. Con la
+            expansion Phantom Liberty y numerosas actualizaciones, Cyberpunk 2077 se ha convertido en una de las
+            experiencias de ciencia ficcion mas completas del gaming moderno.
+          </p>
+        </section>
+
+        <!-- Your Rating Section -->
+        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border">
+          <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-5 h-5 text-gv-yellow" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            Tu Valoracion
+          </h2>
+
+          <!-- Star Rating -->
+          <div class="mb-6">
+            <p class="text-gv-text-muted text-sm mb-3">Haz clic en las estrellas para puntuar</p>
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5">
+              <label for="star5" title="5 estrellas">&#9733;</label>
+              <input type="radio" id="star4" name="rating" value="4">
+              <label for="star4" title="4 estrellas">&#9733;</label>
+              <input type="radio" id="star3" name="rating" value="3">
+              <label for="star3" title="3 estrellas">&#9733;</label>
+              <input type="radio" id="star2" name="rating" value="2">
+              <label for="star2" title="2 estrellas">&#9733;</label>
+              <input type="radio" id="star1" name="rating" value="1">
+              <label for="star1" title="1 estrella">&#9733;</label>
+            </div>
+          </div>
+
+          <!-- Review Textarea -->
+          <div class="mb-4">
+            <textarea placeholder="Escribe tu opinion sobre el juego..." rows="4"
+              class="w-full bg-gv-bg border border-gv-border rounded-xl p-4 text-gv-text placeholder-gv-text-muted focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all resize-none"></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            class="bg-gv-accent hover:bg-gv-accent-hover text-gv-bg font-semibold px-6 py-2.5 rounded-xl transition-all">
+            Publicar Resena
+          </button>
+        </section>
+
+        <!-- Community Reviews -->
+        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border">
+          <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <svg class="w-5 h-5 text-gv-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+            </svg>
+            Comentarios de la Comunidad
+            <span class="ml-auto text-sm text-gv-text-muted font-normal">128 resenas</span>
+          </h2>
+
+          <div class="space-y-6">
+            <!-- Review 1 -->
+            <div class="border-b border-gv-border pb-6">
+              <div class="flex items-start gap-4">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop" alt="Usuario"
+                  class="w-12 h-12 rounded-full object-cover border-2 border-gv-border">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="font-semibold text-white">Carlos Martinez</span>
+                    <div class="flex text-gv-yellow text-sm">
+                      <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <span class="text-gv-text-muted text-sm">hace 2 dias</span>
+                  </div>
+                  <p class="text-gv-text text-sm leading-relaxed">
+                    Despues de la actualizacion 2.0 y Phantom Liberty, este juego es una obra maestra. La historia de V
+                    es increiblemente inmersiva, y Night City se siente viva. Las misiones secundarias tienen tanta
+                    profundidad como la historia principal. Totalmente recomendado para fans del genero.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="border-b border-gv-border pb-6">
+              <div class="flex items-start gap-4">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" alt="Usuario"
+                  class="w-12 h-12 rounded-full object-cover border-2 border-gv-border">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="font-semibold text-white">Laura Fernandez</span>
+                    <div class="flex text-gv-yellow text-sm">
+                      <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span
+                        class="text-gv-border">&#9733;</span>
+                    </div>
+                    <span class="text-gv-text-muted text-sm">hace 1 semana</span>
+                  </div>
+                  <p class="text-gv-text text-sm leading-relaxed">
+                    Graficamente impresionante y con una banda sonora que te atrapa desde el primer momento. El sistema
+                    de habilidades ofrece mucha variedad. Le quito una estrella porque algunos bugs menores aun
+                    persisten, pero nada que arruine la experiencia general.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div>
+              <div class="flex items-start gap-4">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop" alt="Usuario"
+                  class="w-12 h-12 rounded-full object-cover border-2 border-gv-border">
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="font-semibold text-white">Miguel Torres</span>
+                    <div class="flex text-gv-yellow text-sm">
+                      <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                    </div>
+                    <span class="text-gv-text-muted text-sm">hace 2 semanas</span>
+                  </div>
+                  <p class="text-gv-text text-sm leading-relaxed">
+                    No puedo creer que tarde tanto en jugarlo. La narrativa es de las mejores que he experimentado en un
+                    videojuego. Keanu Reeves como Johnny Silverhand es perfecto. Las decisiones realmente importan y
+                    cambian el rumbo de la historia. Un must-play absoluto.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Load More -->
+          <button
+            class="w-full mt-6 py-3 border border-gv-border rounded-xl text-gv-text-muted hover:text-white hover:border-gv-accent transition-all">
+            Ver mas comentarios
+          </button>
+        </section>
+      </div>
+
+      <!-- Right Column (30%) -->
+      <div class="lg:w-[30%] space-y-6">
+
+        <!-- Technical Info -->
+        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border sticky top-24">
+          <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-gv-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+            Ficha Tecnica
+          </h2>
+
+          <div class="space-y-4">
+            <!-- Developer -->
+            <div class="flex justify-between items-start py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-sm">Desarrolladora</span>
+              <span class="text-white text-sm font-medium text-right">CD Projekt Red</span>
+            </div>
+
+            <!-- Publisher -->
+            <div class="flex justify-between items-start py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-sm">Distribuidora</span>
+              <span class="text-white text-sm font-medium text-right">CD Projekt</span>
+            </div>
+
+            <!-- Platforms -->
+            <div class="flex justify-between items-start py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-sm">Plataformas</span>
+              <div class="flex flex-wrap gap-1 justify-end max-w-[60%]">
+                <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">PC</span>
+                <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">PS5</span>
+                <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">Xbox Series</span>
+                <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">PS4</span>
+                <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">Xbox One</span>
+              </div>
+            </div>
+
+            <!-- Release Date -->
+            <div class="flex justify-between items-start py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-sm">Fecha de lanzamiento</span>
+              <span class="text-white text-sm font-medium">10 Dic 2020</span>
+            </div>
+
+            <!-- Average Playtime -->
+            <div class="flex justify-between items-start py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-sm">Tiempo medio de juego</span>
+              <span class="text-white text-sm font-medium">60+ horas</span>
+            </div>
+
+            <!-- Age Rating -->
+            <div class="flex justify-between items-start py-3">
+              <span class="text-gv-text-muted text-sm">Clasificacion</span>
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded border border-red-500/30">PEGI
+                18</span>
+            </div>
+          </div>
+
+          <!-- External Links -->
+          <div class="mt-6 pt-4 border-t border-gv-border space-y-3">
+            <a href="#" class="flex items-center gap-3 text-gv-text-muted hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+              </svg>
+              Sitio Web Oficial
+            </a>
+            <a href="#" class="flex items-center gap-3 text-gv-text-muted hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              Ver Trailer
+            </a>
+          </div>
+        </section>
+
+        <!-- Similar Games -->
+        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border">
+          <h2 class="text-lg font-bold text-white mb-4">Juegos Similares</h2>
+          <div class="space-y-4">
+            <a href="#" class="flex items-center gap-3 group">
+              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=80&h=100&fit=crop"
+                alt="The Witcher 3"
+                class="w-14 h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
+              <div>
+                <p class="text-white text-sm font-medium group-hover:text-gv-accent transition-colors">The Witcher 3</p>
+                <p class="text-gv-text-muted text-xs">RPG, Accion</p>
+              </div>
+            </a>
+            <a href="#" class="flex items-center gap-3 group">
+              <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=80&h=100&fit=crop" alt="Deus Ex"
+                class="w-14 h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
+              <div>
+                <p class="text-white text-sm font-medium group-hover:text-gv-accent transition-colors">Deus Ex: Mankind
+                  Divided</p>
+                <p class="text-gv-text-muted text-xs">RPG, Shooter</p>
+              </div>
+            </a>
+            <a href="#" class="flex items-center gap-3 group">
+              <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=80&h=100&fit=crop" alt="Watch Dogs"
+                class="w-14 h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
+              <div>
+                <p class="text-white text-sm font-medium group-hover:text-gv-accent transition-colors">Watch Dogs:
+                  Legion</p>
+                <p class="text-gv-text-muted text-xs">Accion, Mundo Abierto</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gv-border mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-2">
+          <div
+            class="w-8 h-8 bg-gradient-to-br from-gv-accent to-emerald-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+            </svg>
+          </div>
+          <span class="text-lg font-bold text-white">GameVault</span>
+        </div>
+        <p class="text-gv-text-muted text-sm">2024 GameVault. Tu biblioteca de videojuegos.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

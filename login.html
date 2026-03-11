@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - GameVault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gv-bg': '#0a0a0b',
+            'gv-card': '#141416',
+            'gv-border': '#1f1f23',
+            'gv-accent': '#06b6d4',
+            'gv-accent-hover': '#22d3ee',
+            'gv-steam': '#1b2838',
+            'gv-steam-hover': '#2a475e',
+            'gv-muted': '#71717a',
+            'gv-surface': '#18181b',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+    <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .hero-gradient {
+      background: linear-gradient(to right, rgba(10, 10, 11, 1) 0%, rgba(10, 10, 11, 0.95) 30%, rgba(10, 10, 11, 0.6) 60%, rgba(10, 10, 11, 0.3) 100%);
+    }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1); }
+    .glow-accent { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+  </style>
+</head>
+<body class="min-h-screen bg-gv-bg">
+    <!-- Fondo con imagen y overlay -->
+    <div class="fixed inset-0 z-0">
+        <img 
+            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80" 
+            alt="Gaming Background" 
+            class="w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 bg-black/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-gv-bg via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Contenedor principal centrado -->
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <!-- Tarjeta de Login con Glassmorphism -->
+        <div class="w-full max-w-md bg-gv-card/80 backdrop-blur-xl border border-gv-border rounded-2xl p-8 shadow-2xl shadow-black/50">
+            
+            <!-- Logo y Cabecera -->
+            <div class="text-center mb-8">
+                <a href="#" class=" items-center justify-center gap-2 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-white">GameVault</span>
+                </a>
+                <h1 class="text-2xl font-bold text-white mb-2">Bienvenido de vuelta</h1>
+                <p class="text-gv-text text-sm">Inicia sesion para valorar juegos y crear tu lista</p>
+            </div>
+
+            <!-- Botones de Social Login -->
+            <div class="space-y-3 mb-6">
+                <!-- Boton Steam -->
+                <button class="w-full flex items-center justify-center gap-3 bg-gv-steam hover:bg-gv-steam-hover border border-gv-border px-4 py-3 rounded-xl transition-all duration-200 group">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3l-.5 3H13v6.95c5.05-.5 9-4.76 9-9.95 0-5.52-4.48-10-10-10z"/>
+                    </svg>
+                    <span class="text-white font-medium">Iniciar sesion con Steam</span>
+                </button>
+
+                <!-- Boton Google -->
+                <button class="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 px-4 py-3 rounded-xl transition-all duration-200 group">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span class="text-gray-700 font-medium">Iniciar sesion con Google</span>
+                </button>
+            </div>
+
+            <!-- Separador -->
+            <div class="relative mb-6">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gv-border"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-4 bg-gv-card text-gv-text">O continua con tu email</span>
+                </div>
+            </div>
+
+            <!-- Formulario Tradicional -->
+            <form class="space-y-4 mb-6">
+                <!-- Campo Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Correo Electronico</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="tu@email.com"
+                        class="w-full bg-gv-bg border border-gv-border rounded-xl px-4 py-3 text-white placeholder-gv-text focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all duration-200"
+                    >
+                </div>
+
+                <!-- Campo Contrasena -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="password" class="block text-sm font-medium text-gray-300">Contrasena</label>
+                        <a href="#" class="text-sm text-gv-accent hover:text-gv-accent-hover transition-colors">Olvidaste tu contrasena?</a>
+                    </div>
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            placeholder="********"
+                            class="w-full bg-gv-bg border border-gv-border rounded-xl px-4 py-3 text-white placeholder-gv-text focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all duration-200"
+                        >
+                        <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gv-text hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Boton Iniciar Sesion -->
+                <button 
+                    type="submit"
+                    class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                    Iniciar Sesion
+                </button>
+            </form>
+
+            <!-- Pie - Registro -->
+            <p class="text-center text-gv-text text-sm">
+                No tienes cuenta? 
+                <a href="register.html" class="text-gv-accent hover:text-gv-accent-hover font-medium transition-colors">Registrate aqui</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Decoracion de fondo sutil -->
+    <div class="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gv-accent/5 to-transparent pointer-events-none z-0"></div>
+</body>
+</html>
+
+
+
+
+
+
+

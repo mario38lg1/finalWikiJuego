@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Pagina No Encontrada | GameVault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gv-bg': '#0a0a0b',
+                        'gv-card': '#151518',
+                        'gv-border': '#2a2a2e',
+                        'gv-accent': '#06b6d4',
+                        'gv-muted': '#71717a',
+                        'gv-steam': '#1b2838',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Efecto Glitch para el 404 */
+        .glitch {
+            position: relative;
+            font-size: 12rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            color: #ef4444;
+            animation: glitch-effect 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+            transform: translate(-3px, -3px);
+        }
+        
+        .glitch::after {
+            color: #a855f7;
+            animation: glitch-effect 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+            transform: translate(3px, 3px);
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-0.5deg); }
+            20% { transform: skew(0.5deg); }
+            30% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* Scanlines overlay */
+        .scanlines::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-gv-bg text-white min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-gv-bg/95 backdrop-blur-md border-b border-gv-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div class="w-9 h-9 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 6H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm5 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-3a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-3a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm2-2a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-white group-hover:text-gv-accent transition-colors">GameVault</span>
+                </a>
+
+                <!-- Barra de busqueda -->
+                <div class="flex-1 max-w-xl mx-8">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            placeholder="Buscar juegos, generos, plataformas..." 
+                            class="w-full bg-gv-card border border-gv-border rounded-full py-2.5 pl-12 pr-4 text-sm text-white placeholder-gv-muted focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all"
+                        >
+                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Acciones usuario -->
+                <div class="flex items-center gap-4">
+                    <a href="profile.html" class="relative p-2 text-gv-muted hover:text-gv-accent transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-gv-accent text-white text-xs font-bold rounded-full flex items-center justify-center">3</span>
+                    </a>
+                    <a href="profile.html" class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-sm font-bold hover:ring-2 hover:ring-gv-accent transition-all">
+                        GP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal 404 -->
+    <main class="flex-1 flex items-center justify-center relative scanlines overflow-hidden">
+        <!-- Fondo decorativo -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="text-center px-4 relative z-10">
+            <!-- Error 404 con efecto glitch -->
+            <div class="glitch select-none" aria-hidden="true">404</div>
+            
+            <!-- Mensaje principal -->
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-4 mb-4">
+                Game Over: Esta pagina no existe
+            </h1>
+            
+            <!-- Subtitulo -->
+            <p class="text-gv-muted text-lg max-w-lg mx-auto mb-10">
+                Parece que te has salido del mapa, el enlace esta roto o el juego fue eliminado de nuestra base de datos.
+            </p>
+            
+            <!-- Boton CTA -->
+            <a 
+                href="index.html" 
+                class="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold text-lg px-8 py-4 rounded-full hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105 transition-all duration-300"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Volver a la Base (Inicio)
+            </a>
+
+            <!-- Easter egg / hint gaming -->
+            <p class="text-gv-muted/50 text-sm mt-12">
+                Pulsa <kbd class="px-2 py-1 bg-gv-card border border-gv-border rounded text-xs text-white">ESC</kbd> para pausar... ah no, espera.
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>

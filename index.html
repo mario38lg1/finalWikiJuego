@@ -1,0 +1,1113 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameVault - Base de Datos de Videojuegos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gv-bg': '#0a0a0b',
+            'gv-card': '#141416',
+            'gv-border': '#1f1f23',
+            'gv-accent': '#06b6d4',
+            'gv-accent-hover': '#22d3ee',
+            'gv-steam': '#1b2838',
+            'gv-steam-hover': '#2a475e',
+            'gv-muted': '#71717a',
+            'gv-surface': '#18181b',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(to right, rgba(10, 10, 11, 1) 0%, rgba(10, 10, 11, 0.95) 30%, rgba(10, 10, 11, 0.6) 60%, rgba(10, 10, 11, 0.3) 100%);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
+    }
+
+    .glow-accent {
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+    }
+  </style>
+</head>
+
+<body class="bg-gv-bg text-white min-h-screen">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-gv-bg/95 backdrop-blur-md border-b border-gv-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-4">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 flex-shrink-0">
+          <div class="w-8 h-8 bg-gv-accent rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M21 6H3a1 1 0 00-1 1v10a1 1 0 001 1h18a1 1 0 001-1V7a1 1 0 00-1-1zM6 14.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5-2.5a1 1 0 110-2 1 1 0 010 2zm3 0a1 1 0 110-2 1 1 0 010 2zm4 2.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-white">GameVault</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-2xl mx-4">
+          <div class="relative">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-muted" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" placeholder="Buscar videojuegos, géneros, plataformas..."
+              class="w-full bg-gv-surface border border-gv-border rounded-xl pl-12 pr-4 py-3 text-sm text-white placeholder:text-gv-muted focus:outline-none focus:ring-2 focus:ring-gv-accent focus:border-transparent transition-all">
+          </div>
+        </div>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Wishlist -->
+          <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gv-surface transition-colors group">
+            <svg class="w-5 h-5 text-gv-muted group-hover:text-gv-accent transition-colors" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span class="hidden sm:inline text-sm text-gv-muted group-hover:text-white transition-colors">Mi
+              Lista</span>
+            <span class="bg-gv-accent text-gv-bg text-xs font-bold px-2 py-0.5 rounded-full">12</span>
+          </a>
+
+          <!-- Profile -->
+          <button class="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-gv-accent/50 transition-all">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=face"
+              alt="Avatar del usuario" class="w-9 h-9 rounded-full object-cover border-2 border-gv-border">
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="relative pt-16 h-[85vh] min-h-[600px] overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80" alt="Elden Ring"
+        class="w-full h-full object-cover">
+      <div class="hero-gradient absolute inset-0"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 h-full flex items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="max-w-2xl">
+          <span
+            class="inline-flex items-center gap-2 px-3 py-1 bg-gv-accent/20 border border-gv-accent/30 rounded-full text-gv-accent text-sm font-medium mb-4">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            Juego Destacado
+          </span>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4 text-balance">
+            Elden Ring
+          </h1>
+
+          <p class="text-lg text-zinc-300 leading-relaxed mb-6 max-w-xl">
+            Un RPG de acción y fantasía épica ambientado en un vasto mundo creado por Hidetaka Miyazaki y George R. R.
+            Martin. Embárcate en una odisea por las Tierras Intermedias.
+          </p>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-4 mb-8">
+            <div class="flex items-center gap-1">
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+            </div>
+            <span class="text-3xl font-bold text-white">9.5</span>
+            <span class="text-gv-muted text-sm">(24,582 valoraciones)</span>
+          </div>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="px-3 py-1 bg-gv-surface border border-gv-border rounded-lg text-sm text-zinc-300">RPG</span>
+            <span class="px-3 py-1 bg-gv-surface border border-gv-border rounded-lg text-sm text-zinc-300">Acción</span>
+            <span class="px-3 py-1 bg-gv-surface border border-gv-border rounded-lg text-sm text-zinc-300">Mundo
+              Abierto</span>
+            <span
+              class="px-3 py-1 bg-gv-surface border border-gv-border rounded-lg text-sm text-zinc-300">Souls-like</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-4">
+            <button
+              class="flex items-center gap-2 bg-gv-accent hover:bg-gv-accent-hover text-gv-bg font-semibold px-6 py-3 rounded-xl transition-all glow-accent">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+              Añadir a mi lista
+            </button>
+            <button
+              class="flex items-center gap-2 bg-gv-surface hover:bg-gv-border border border-gv-border text-white font-semibold px-6 py-3 rounded-xl transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Ver detalles
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== POPULARES SECTION ========== -->
+  <section class="py-12 bg-gv-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-1 h-8 bg-gv-accent rounded-full"></div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Populares Ahora</h2>
+          <span class="bg-gv-accent/20 text-gv-accent text-xs font-semibold px-2 py-1 rounded-full">TRENDING</span>
+        </div>
+        <a href="#"
+          class="text-gv-accent hover:text-gv-accent-hover text-sm font-medium flex items-center gap-1 transition-colors">
+          Ver todos
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Horizontal Scroll -->
+      <div class="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+
+        <!-- Card 1 -->
+        <article
+          class="flex-shrink-0 w-56 bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300 group">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0f?w=400&h=600&fit=crop"
+              alt="Baldur's Gate 3" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors group/heart">
+              <svg class="w-5 h-5 text-white group-hover/heart:text-white" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-3 left-3 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.7
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-base mb-1 truncate">Baldur's Gate 3</h3>
+            <p class="text-gv-muted text-sm mb-3">2023</p>
+            <a href="#"
+              class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article
+          class="flex-shrink-0 w-56 bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300 group">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&h=600&fit=crop"
+              alt="Cyberpunk 2077" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors group/heart">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-3 left-3 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              8.9
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-base mb-1 truncate">Cyberpunk 2077</h3>
+            <p class="text-gv-muted text-sm mb-3">2020</p>
+            <a href="#"
+              class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article
+          class="flex-shrink-0 w-56 bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300 group">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=600&fit=crop"
+              alt="The Legend of Zelda" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-3 right-3 w-9 h-9 bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-3 left-3 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.8
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-base mb-1 truncate">Zelda: Tears of the Kingdom</h3>
+            <p class="text-gv-muted text-sm mb-3">2023</p>
+            <a href="#"
+              class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article
+          class="flex-shrink-0 w-56 bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300 group">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1493711662062-fa541f7f3d24?w=400&h=600&fit=crop"
+              alt="God of War Ragnarök" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-3 left-3 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.4
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-base mb-1 truncate">God of War Ragnarök</h3>
+            <p class="text-gv-muted text-sm mb-3">2022</p>
+            <a href="#"
+              class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article
+          class="flex-shrink-0 w-56 bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300 group">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=600&fit=crop"
+              alt="Hogwarts Legacy" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-3 left-3 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              8.7
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-base mb-1 truncate">Hogwarts Legacy</h3>
+            <p class="text-gv-muted text-sm mb-3">2023</p>
+            <a href="#"
+              class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article
+          class="flex-shrink-0 w-56 bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300 group">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=600&fit=crop" alt="Starfield"
+              class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-3 left-3 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              7.8
+            </span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-base mb-1 truncate">Starfield</h3>
+            <p class="text-gv-muted text-sm mb-3">2023</p>
+            <a href="#"
+              class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TODOS LOS VIDEOJUEGOS SECTION ========== -->
+  <section class="py-12 bg-gv-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-1 h-8 bg-gv-accent rounded-full"></div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Todos los Videojuegos</h2>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="bg-gv-card border border-gv-border rounded-2xl p-4 mb-8">
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Genre Filter -->
+          <div class="relative">
+            <select
+              class="appearance-none bg-gv-surface border border-gv-border rounded-xl px-4 py-2.5 pr-10 text-sm text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-gv-accent">
+              <option>Todos los géneros</option>
+              <option>Acción</option>
+              <option>RPG</option>
+              <option>Aventura</option>
+              <option>Estrategia</option>
+              <option>Deportes</option>
+              <option>Simulación</option>
+              <option>Terror</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+
+          <!-- Platform Filter -->
+          <div class="relative">
+            <select
+              class="appearance-none bg-gv-surface border border-gv-border rounded-xl px-4 py-2.5 pr-10 text-sm text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-gv-accent">
+              <option>Todas las plataformas</option>
+              <option>PC</option>
+              <option>PlayStation 5</option>
+              <option>Xbox Series X</option>
+              <option>Nintendo Switch</option>
+              <option>PlayStation 4</option>
+              <option>Xbox One</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+
+          <!-- Year Filter -->
+          <div class="relative">
+            <select
+              class="appearance-none bg-gv-surface border border-gv-border rounded-xl px-4 py-2.5 pr-10 text-sm text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-gv-accent">
+              <option>Año</option>
+              <option>2024</option>
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+              <option>2020</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+
+          <!-- Rating Filter -->
+          <div class="relative">
+            <select
+              class="appearance-none bg-gv-surface border border-gv-border rounded-xl px-4 py-2.5 pr-10 text-sm text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-gv-accent">
+              <option>Valoración mínima</option>
+              <option>9+ Estrellas</option>
+              <option>8+ Estrellas</option>
+              <option>7+ Estrellas</option>
+              <option>6+ Estrellas</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-muted pointer-events-none" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+
+          <!-- Sort -->
+          <div class="relative ml-auto">
+            <select
+              class="appearance-none bg-gv-accent/10 border border-gv-accent/30 rounded-xl px-4 py-2.5 pr-10 text-sm text-gv-accent cursor-pointer focus:outline-none focus:ring-2 focus:ring-gv-accent">
+              <option>Ordenar por: Popularidad</option>
+              <option>Ordenar por: Valoración</option>
+              <option>Ordenar por: Fecha</option>
+              <option>Ordenar por: A-Z</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gv-accent pointer-events-none"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Games Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
+
+        <!-- Game Card 1 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400&h=600&fit=crop"
+              alt="Red Dead Redemption 2" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.6
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Red Dead Redemption 2</h3>
+            <p class="text-gv-muted text-xs mb-2">2018</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 2 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop" alt="Hades"
+              class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.3
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Hades</h3>
+            <p class="text-gv-muted text-xs mb-2">2020</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 3 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&h=600&fit=crop"
+              alt="Hollow Knight" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.1
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Hollow Knight</h3>
+            <p class="text-gv-muted text-xs mb-2">2017</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 4 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=600&fit=crop"
+              alt="The Witcher 3" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.5
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">The Witcher 3</h3>
+            <p class="text-gv-muted text-xs mb-2">2015</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 5 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1556438064-2d7646166914?w=400&h=600&fit=crop" alt="Sekiro"
+              class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.2
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Sekiro: Shadows Die Twice</h3>
+            <p class="text-gv-muted text-xs mb-2">2019</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 6 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?w=400&h=600&fit=crop"
+              alt="Dark Souls III" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.0
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Dark Souls III</h3>
+            <p class="text-gv-muted text-xs mb-2">2016</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 7 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1519669556878-63bdad8a1a49?w=400&h=600&fit=crop"
+              alt="Disco Elysium" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.4
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Disco Elysium</h3>
+            <p class="text-gv-muted text-xs mb-2">2019</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 8 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1542332213-31f87348057f?w=400&h=600&fit=crop" alt="Celeste"
+              class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.0
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Celeste</h3>
+            <p class="text-gv-muted text-xs mb-2">2018</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 9 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=400&h=600&fit=crop"
+              alt="Stardew Valley" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.3
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Stardew Valley</h3>
+            <p class="text-gv-muted text-xs mb-2">2016</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 10 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1585620385456-4759f9b5c7d9?w=400&h=600&fit=crop"
+              alt="Persona 5 Royal" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.5
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Persona 5 Royal</h3>
+            <p class="text-gv-muted text-xs mb-2">2020</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 11 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1614294149010-950b698f72c0?w=400&h=600&fit=crop"
+              alt="Ghost of Tsushima" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              9.1
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Ghost of Tsushima</h3>
+            <p class="text-gv-muted text-xs mb-2">2020</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Card 12 -->
+        <article
+          class="bg-gv-card rounded-2xl overflow-hidden border border-gv-border card-hover transition-all duration-300">
+          <div class="relative aspect-[3/4]">
+            <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=400&h=600&fit=crop"
+              alt="Resident Evil Village" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <button
+              class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+            <span
+              class="absolute bottom-2 left-2 bg-yellow-500/90 text-gv-bg text-xs font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              8.6
+            </span>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Resident Evil Village</h3>
+            <p class="text-gv-muted text-xs mb-2">2021</p>
+            <a href="#"
+              class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              Ver en Steam
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Load More -->
+      <div class="flex justify-center mt-10">
+        <button
+          class="flex items-center gap-2 bg-gv-surface hover:bg-gv-border border border-gv-border text-white font-medium px-8 py-3 rounded-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Cargar más juegos
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-gv-card border-t border-gv-border py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+        <!-- Brand -->
+        <div class="col-span-2 md:col-span-1">
+          <a href="#" class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-gv-accent rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M21 6H3a1 1 0 00-1 1v10a1 1 0 001 1h18a1 1 0 001-1V7a1 1 0 00-1-1zM6 14.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5-2.5a1 1 0 110-2 1 1 0 010 2zm3 0a1 1 0 110-2 1 1 0 010 2zm4 2.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
+              </svg>
+            </div>
+            <span class="text-lg font-bold text-white">GameVault</span>
+          </a>
+          <p class="text-gv-muted text-sm leading-relaxed">
+            La base de datos definitiva para descubrir, valorar y coleccionar tus videojuegos favoritos.
+          </p>
+        </div>
+
+        <!-- Navegación -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Navegación</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Inicio</a></li>
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Populares</a></li>
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Próximos lanzamientos</a>
+            </li>
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Géneros</a></li>
+          </ul>
+        </div>
+
+        <!-- Cuenta -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Cuenta</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Mi perfil</a></li>
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Lista de deseados</a></li>
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Mis valoraciones</a></li>
+            <li><a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Configuración</a></li>
+          </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">Síguenos</h4>
+          <div class="flex gap-3">
+            <a href="#"
+              class="w-10 h-10 bg-gv-surface border border-gv-border rounded-lg flex items-center justify-center hover:bg-gv-accent hover:border-gv-accent transition-all group">
+              <svg class="w-5 h-5 text-gv-muted group-hover:text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-10 h-10 bg-gv-surface border border-gv-border rounded-lg flex items-center justify-center hover:bg-gv-accent hover:border-gv-accent transition-all group">
+              <svg class="w-5 h-5 text-gv-muted group-hover:text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-10 h-10 bg-gv-surface border border-gv-border rounded-lg flex items-center justify-center hover:bg-gv-accent hover:border-gv-accent transition-all group">
+              <svg class="w-5 h-5 text-gv-muted group-hover:text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="pt-8 border-t border-gv-border flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-gv-muted text-sm">
+          &copy; 2024 GameVault. Todos los derechos reservados.
+        </p>
+        <div class="flex gap-6">
+          <a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Privacidad</a>
+          <a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Términos</a>
+          <a href="#" class="text-gv-muted hover:text-white text-sm transition-colors">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
