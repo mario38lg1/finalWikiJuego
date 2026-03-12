@@ -39,6 +39,30 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    .tab-content {
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .tab-content.hidden {
+      display: none;
+    }
+
+    .tab-content.block {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 
@@ -154,13 +178,13 @@
       <!-- Tabs -->
       <div class="mt-10 border-b border-gv-border">
         <div class="flex gap-8">
-          <button class="pb-4 px-1 text-gv-accent font-semibold border-b-2 border-gv-accent">
+          <button id="btn-lista" onclick="cambiarPestana(this.id)" class="pb-4 px-1 text-gv-accent font-semibold border-b-2 border-gv-accent transition-all duration-300">
             Mi Lista (Pendientes)
           </button>
-          <button class="pb-4 px-1 text-gv-text-muted hover:text-white transition-colors font-medium">
+          <button id="btn-completados" onclick="cambiarPestana(this.id)" class="pb-4 px-1 text-gv-text-muted hover:text-white transition-all duration-300 font-medium border-b-2 border-transparent">
             Juegos Completados
           </button>
-          <button class="pb-4 px-1 text-gv-text-muted hover:text-white transition-colors font-medium">
+          <button id="btn-resenas" onclick="cambiarPestana(this.id)" class="pb-4 px-1 text-gv-text-muted hover:text-white transition-all duration-300 font-medium border-b-2 border-transparent">
             Mis Resenas
           </button>
         </div>
@@ -169,270 +193,535 @@
       <!-- Content Grid -->
       <div class="mt-8 pb-16 flex flex-col lg:flex-row gap-8">
 
-        <!-- Main Grid - Wishlist -->
+        <!-- Main Content Area -->
         <div class="flex-1">
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="text-xl font-bold text-white">24 juegos en tu lista</h2>
-            <select
-              class="bg-gv-card border border-gv-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-gv-accent">
-              <option>Ordenar por: Reciente</option>
-              <option>Nombre A-Z</option>
-              <option>Valoracion</option>
-              <option>Fecha de lanzamiento</option>
-            </select>
+
+          <!-- Tab Content: Mi Lista -->
+          <div id="tab-lista" class="tab-content block">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold text-white">24 juegos en tu lista</h2>
+              <select
+                class="bg-gv-card border border-gv-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-gv-accent">
+                <option>Ordenar por: Reciente</option>
+                <option>Nombre A-Z</option>
+                <option>Valoracion</option>
+                <option>Fecha de lanzamiento</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+              <!-- Game Card 1 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80" alt="The Witcher 3"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">The Witcher 3</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2015</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.4</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 2 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&q=80" alt="Hollow Knight"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Hollow Knight</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2017</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.1</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 3 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1493711662062-fa541f7f3d24?w=400&q=80" alt="Hades"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Hades</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2020</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.3</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 4 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80" alt="Sekiro"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Sekiro: Shadows Die Twice</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2019</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.0</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 5 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80" alt="Celeste"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Celeste</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2018</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.2</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 6 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0c?w=400&q=80" alt="Disco Elysium"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Disco Elysium</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2019</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.5</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 7 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&q=80" alt="Stardew Valley"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Stardew Valley</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2016</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.0</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Game Card 8 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" alt="Baldurs Gate 3"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <button
+                    class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Baldur's Gate 3</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">2023</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.7</span>
+                    </div>
+                    <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
+                      Steam</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-
-            <!-- Game Card 1 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80" alt="The Witcher 3"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">The Witcher 3</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2015</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.4</span>
-                  </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
-                </div>
-              </div>
+          <!-- Tab Content: Juegos Completados -->
+          <div id="tab-completados" class="tab-content hidden">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold text-white">12 juegos completados</h2>
+              <select
+                class="bg-gv-card border border-gv-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-gv-accent">
+                <option>Ordenar por: Reciente</option>
+                <option>Nombre A-Z</option>
+                <option>Valoracion</option>
+                <option>Horas jugadas</option>
+              </select>
             </div>
 
-            <!-- Game Card 2 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&q=80" alt="Hollow Knight"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Hollow Knight</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2017</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.1</span>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+              <!-- Game Card Completado 1 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&q=80" alt="Cyberpunk 2077"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <div class="absolute top-2 right-2 bg-gv-accent text-gv-bg text-xs font-bold px-2 py-1 rounded-lg">
+                    100%
                   </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Cyberpunk 2077</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">156 horas jugadas</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">8.8</span>
+                    </div>
+                    <span class="text-xs text-gv-accent">Completado</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Game Card 3 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1493711662062-fa541f7f3d24?w=400&q=80" alt="Hades"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Hades</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2020</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.3</span>
+              <!-- Game Card Completado 2 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=400&q=80" alt="Elden Ring"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <div class="absolute top-2 right-2 bg-gv-accent text-gv-bg text-xs font-bold px-2 py-1 rounded-lg">
+                    100%
                   </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">Elden Ring</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">210 horas jugadas</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.8</span>
+                    </div>
+                    <span class="text-xs text-gv-accent">Completado</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Game Card 4 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80" alt="Sekiro"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Sekiro: Shadows Die Twice</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2019</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.0</span>
+              <!-- Game Card Completado 3 -->
+              <div
+                class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=400&q=80" alt="God of War Ragnarok"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <div class="absolute top-2 right-2 bg-gv-accent text-gv-bg text-xs font-bold px-2 py-1 rounded-lg">
+                    87%
                   </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
+                </div>
+                <div class="p-3">
+                  <h3 class="font-semibold text-white text-sm truncate">God of War Ragnarok</h3>
+                  <p class="text-gv-text-muted text-xs mt-0.5">68 horas jugadas</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-1">
+                      <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span class="text-white text-xs font-medium">9.5</span>
+                    </div>
+                    <span class="text-xs text-gv-accent">Completado</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Game Card 5 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80" alt="Celeste"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Celeste</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2018</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.2</span>
-                  </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
-                </div>
-              </div>
             </div>
-
-            <!-- Game Card 6 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0c?w=400&q=80" alt="Disco Elysium"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Disco Elysium</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2019</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.5</span>
-                  </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Game Card 7 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&q=80" alt="Stardew Valley"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Stardew Valley</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2016</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.0</span>
-                  </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Game Card 8 -->
-            <div
-              class="group bg-gv-card rounded-xl overflow-hidden border border-gv-border hover:border-gv-accent/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gv-accent/10">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" alt="Baldurs Gate 3"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <button
-                  class="absolute top-2 right-2 w-8 h-8 bg-gv-danger/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-gv-danger">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <div class="p-3">
-                <h3 class="font-semibold text-white text-sm truncate">Baldur's Gate 3</h3>
-                <p class="text-gv-text-muted text-xs mt-0.5">2023</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                    <span class="text-white text-xs font-medium">9.7</span>
-                  </div>
-                  <a href="#" class="text-xs text-gv-steam-hover hover:text-gv-accent transition-colors">Ver en
-                    Steam</a>
-                </div>
-              </div>
-            </div>
-
           </div>
+
+          <!-- Tab Content: Mis Resenas -->
+          <div id="tab-resenas" class="tab-content hidden">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold text-white">56 resenas escritas</h2>
+              <select
+                class="bg-gv-card border border-gv-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-gv-accent">
+                <option>Ordenar por: Reciente</option>
+                <option>Mejor valoradas</option>
+                <option>Mas utiles</option>
+              </select>
+            </div>
+
+            <div class="space-y-4">
+
+              <!-- Resena 1 -->
+              <div class="bg-gv-card border border-gv-border rounded-xl p-5 hover:border-gv-accent/30 transition-colors">
+                <div class="flex gap-4">
+                  <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&q=80" alt="The Witcher 3"
+                    class="w-24 h-32 rounded-lg object-cover flex-shrink-0">
+                  <div class="flex-1">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <h3 class="font-bold text-white text-lg">The Witcher 3: Wild Hunt</h3>
+                        <div class="flex items-center gap-1 mt-1">
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <span class="text-gv-text-muted text-sm ml-2">5/5</span>
+                        </div>
+                      </div>
+                      <span class="text-gv-text-muted text-sm">Hace 2 dias</span>
+                    </div>
+                    <p class="text-gv-text mt-3 text-sm leading-relaxed">Una obra maestra absoluta. Geralt es el mejor protagonista de videojuegos que he visto. La historia, las misiones secundarias, el mundo abierto... todo es perfecto. Las expansiones Blood and Wine y Hearts of Stone son tan buenas como el juego base.</p>
+                    <div class="flex items-center gap-4 mt-4">
+                      <button class="flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                        </svg>
+                        <span>124 utiles</span>
+                      </button>
+                      <button class="flex items-center gap-2 text-gv-text-muted hover:text-white transition-colors text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                        <span>18 comentarios</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resena 2 -->
+              <div class="bg-gv-card border border-gv-border rounded-xl p-5 hover:border-gv-accent/30 transition-colors">
+                <div class="flex gap-4">
+                  <img src="https://images.unsplash.com/photo-1493711662062-fa541f7f3d24?w=200&q=80" alt="Hades"
+                    class="w-24 h-32 rounded-lg object-cover flex-shrink-0">
+                  <div class="flex-1">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <h3 class="font-bold text-white text-lg">Hades</h3>
+                        <div class="flex items-center gap-1 mt-1">
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-gv-text-muted" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <span class="text-gv-text-muted text-sm ml-2">4/5</span>
+                        </div>
+                      </div>
+                      <span class="text-gv-text-muted text-sm">Hace 5 dias</span>
+                    </div>
+                    <p class="text-gv-text mt-3 text-sm leading-relaxed">El mejor roguelike que he jugado. La historia y el combate son adictivos. Supergiant Games ha creado algo especial con la forma en que integra la narrativa con el gameplay. Cada run se siente unico y gratificante.</p>
+                    <div class="flex items-center gap-4 mt-4">
+                      <button class="flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                        </svg>
+                        <span>89 utiles</span>
+                      </button>
+                      <button class="flex items-center gap-2 text-gv-text-muted hover:text-white transition-colors text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                        <span>7 comentarios</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resena 3 -->
+              <div class="bg-gv-card border border-gv-border rounded-xl p-5 hover:border-gv-accent/30 transition-colors">
+                <div class="flex gap-4">
+                  <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=200&q=80" alt="Baldurs Gate 3"
+                    class="w-24 h-32 rounded-lg object-cover flex-shrink-0">
+                  <div class="flex-1">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <h3 class="font-bold text-white text-lg">Baldur's Gate 3</h3>
+                        <div class="flex items-center gap-1 mt-1">
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <span class="text-gv-text-muted text-sm ml-2">5/5</span>
+                        </div>
+                      </div>
+                      <span class="text-gv-text-muted text-sm">Hace 1 semana</span>
+                    </div>
+                    <p class="text-gv-text mt-3 text-sm leading-relaxed">GOTY 2023 sin discusion. Larian ha creado algo increible. La libertad que te da el juego para resolver situaciones es impresionante. Cada decision importa y las consecuencias se sienten reales. Un RPG que define una generacion.</p>
+                    <div class="flex items-center gap-4 mt-4">
+                      <button class="flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                        </svg>
+                        <span>256 utiles</span>
+                      </button>
+                      <button class="flex items-center gap-2 text-gv-text-muted hover:text-white transition-colors text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                        <span>34 comentarios</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
         <!-- Sidebar - Recent Activity -->
@@ -557,6 +846,56 @@
       </div>
     </div>
   </main>
+
+  <script>
+    function cambiarPestana(idBoton) {
+      // Obtener todos los contenidos de pestanas
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      // Obtener todos los botones de pestanas
+      const tabButtons = document.querySelectorAll('[id^="btn-"]');
+      
+      // Ocultar todos los contenidos
+      tabContents.forEach(content => {
+        content.classList.remove('block');
+        content.classList.add('hidden');
+      });
+      
+      // Quitar estilo activo de todos los botones
+      tabButtons.forEach(button => {
+        button.classList.remove('text-gv-accent', 'border-gv-accent');
+        button.classList.add('text-gv-text-muted', 'border-transparent');
+      });
+      
+      // Determinar que tab mostrar basado en el id del boton
+      let tabId;
+      switch(idBoton) {
+        case 'btn-lista':
+          tabId = 'tab-lista';
+          break;
+        case 'btn-completados':
+          tabId = 'tab-completados';
+          break;
+        case 'btn-resenas':
+          tabId = 'tab-resenas';
+          break;
+      }
+      
+      // Mostrar el contenido correspondiente
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) {
+        activeTab.classList.remove('hidden');
+        activeTab.classList.add('block');
+      }
+      
+      // Aplicar estilo activo al boton pulsado
+      const activeButton = document.getElementById(idBoton);
+      if (activeButton) {
+        activeButton.classList.remove('text-gv-text-muted', 'border-transparent');
+        activeButton.classList.add('text-gv-accent', 'border-gv-accent');
+      }
+    }
+  </script>
 
 </body>
 
