@@ -77,7 +77,7 @@
 
         <!-- Search Bar -->
         <div class="flex-1 max-w-2xl mx-8">
-          <div class="relative">
+          <form action="busqueda.html" class="relative">
             <input type="text" placeholder="Buscar juegos, generos, plataformas..."
               class="w-full bg-gv-card border border-gv-border rounded-full py-2.5 pl-12 pr-4 text-sm text-gv-text placeholder-gv-text-muted focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all">
             <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-text-muted" fill="none"
@@ -85,14 +85,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-          </div>
+          </form>
         </div>
 
         <!-- Right Side -->
         <div class="flex items-center gap-4">
           <!-- Wishlist -->
-          <a href="#"
-            class="relative flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors">
+          <a href="login.html" class="relative flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -102,10 +101,10 @@
               class="absolute -top-1 -right-1 sm:-top-1 sm:right-8 w-5 h-5 bg-gv-accent text-gv-bg text-xs font-bold rounded-full flex items-center justify-center">3</span>
           </a>
           <!-- User Avatar -->
-          <button
+          <a href="perfil.html"
             class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold text-sm ring-2 ring-gv-border hover:ring-gv-accent transition-all">
             JP
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -254,10 +253,10 @@
           </div>
 
           <!-- Submit Button -->
-          <button
-            class="bg-gv-accent hover:bg-gv-accent-hover text-gv-bg font-semibold px-6 py-2.5 rounded-xl transition-all">
+          <a href="login.html"
+            class="bg-gv-accent hover:bg-gv-accent-hover text-gv-bg font-semibold px-6 py-2.5 rounded-xl transition-all inline-block">
             Publicar Resena
-          </button>
+          </a>
         </section>
 
         <!-- Community Reviews -->

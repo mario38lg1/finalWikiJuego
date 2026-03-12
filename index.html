@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -72,7 +72,7 @@
       <div class="flex items-center justify-between h-16 gap-4">
 
         <!-- Logo -->
-        <a href="#" class="flex items-center gap-2 flex-shrink-0">
+        <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
           <div class="w-8 h-8 bg-gv-accent rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -84,7 +84,7 @@
 
         <!-- Search Bar -->
         <div class="flex-1 max-w-2xl mx-4">
-          <div class="relative">
+          <form action="busqueda.html" class="relative">
             <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-muted" fill="none"
               stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -92,13 +92,13 @@
             </svg>
             <input type="text" placeholder="Buscar videojuegos, géneros, plataformas..."
               class="w-full bg-gv-surface border border-gv-border rounded-xl pl-12 pr-4 py-3 text-sm text-white placeholder:text-gv-muted focus:outline-none focus:ring-2 focus:ring-gv-accent focus:border-transparent transition-all">
-          </div>
+          </form>
         </div>
 
         <!-- Right Actions -->
         <div class="flex items-center gap-3">
           <!-- Wishlist -->
-          <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gv-surface transition-colors group">
+          <a href="login.html" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gv-surface transition-colors group">
             <svg class="w-5 h-5 text-gv-muted group-hover:text-gv-accent transition-colors" fill="none"
               stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -110,10 +110,10 @@
           </a>
 
           <!-- Profile -->
-          <button class="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-gv-accent/50 transition-all">
+          <a href="perfil.html" class="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-gv-accent/50 transition-all cursor-pointer inline-block">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=face"
               alt="Avatar del usuario" class="w-9 h-9 rounded-full object-cover border-2 border-gv-border">
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -197,14 +197,14 @@
               </svg>
               Añadir a mi lista
             </button>
-            <button
-              class="flex items-center gap-2 bg-gv-surface hover:bg-gv-border border border-gv-border text-white font-semibold px-6 py-3 rounded-xl transition-all">
+            <a href="detalle.html"
+              class="flex items-center gap-2 bg-gv-surface hover:bg-gv-border border border-gv-border text-white font-semibold px-6 py-3 rounded-xl transition-all inline-flex">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               Ver detalles
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -239,7 +239,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0f?w=400&h=600&fit=crop"
               alt="Baldur's Gate 3" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors group/heart">
               <svg class="w-5 h-5 text-white group-hover/heart:text-white" fill="none" stroke="currentColor"
@@ -258,7 +259,7 @@
             </span>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-white text-base mb-1 truncate">Baldur's Gate 3</h3>
+            <h3 class="font-semibold text-white text-base mb-1 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Baldur's Gate 3</a></h3>
             <p class="text-gv-muted text-sm mb-3">2023</p>
             <a href="#"
               class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
@@ -277,7 +278,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&h=600&fit=crop"
               alt="Cyberpunk 2077" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors group/heart">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -295,7 +297,7 @@
             </span>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-white text-base mb-1 truncate">Cyberpunk 2077</h3>
+            <h3 class="font-semibold text-white text-base mb-1 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Cyberpunk 2077</a></h3>
             <p class="text-gv-muted text-sm mb-3">2020</p>
             <a href="#"
               class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
@@ -314,7 +316,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=600&fit=crop"
               alt="The Legend of Zelda" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-3 right-3 w-9 h-9 bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors">
               <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -332,7 +335,7 @@
             </span>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-white text-base mb-1 truncate">Zelda: Tears of the Kingdom</h3>
+            <h3 class="font-semibold text-white text-base mb-1 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Zelda: Tears of the Kingdom</a></h3>
             <p class="text-gv-muted text-sm mb-3">2023</p>
             <a href="#"
               class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
@@ -351,7 +354,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1493711662062-fa541f7f3d24?w=400&h=600&fit=crop"
               alt="God of War Ragnarök" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -369,7 +373,7 @@
             </span>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-white text-base mb-1 truncate">God of War Ragnarök</h3>
+            <h3 class="font-semibold text-white text-base mb-1 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">God of War Ragnarök</a></h3>
             <p class="text-gv-muted text-sm mb-3">2022</p>
             <a href="#"
               class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
@@ -388,7 +392,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=600&fit=crop"
               alt="Hogwarts Legacy" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -406,7 +411,7 @@
             </span>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-white text-base mb-1 truncate">Hogwarts Legacy</h3>
+            <h3 class="font-semibold text-white text-base mb-1 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Hogwarts Legacy</a></h3>
             <p class="text-gv-muted text-sm mb-3">2023</p>
             <a href="#"
               class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
@@ -425,7 +430,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=600&fit=crop" alt="Starfield"
               class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-3 right-3 w-9 h-9 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -443,7 +449,7 @@
             </span>
           </div>
           <div class="p-4">
-            <h3 class="font-semibold text-white text-base mb-1 truncate">Starfield</h3>
+            <h3 class="font-semibold text-white text-base mb-1 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Starfield</a></h3>
             <p class="text-gv-muted text-sm mb-3">2023</p>
             <a href="#"
               class="flex items-center justify-center gap-2 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-sm font-medium py-2 rounded-lg transition-colors">
@@ -568,7 +574,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400&h=600&fit=crop"
               alt="Red Dead Redemption 2" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -586,7 +593,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Red Dead Redemption 2</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Red Dead Redemption 2</a></h3>
             <p class="text-gv-muted text-xs mb-2">2018</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -605,7 +612,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop" alt="Hades"
               class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors">
               <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -623,7 +631,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Hades</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Hades</a></h3>
             <p class="text-gv-muted text-xs mb-2">2020</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -642,7 +650,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&h=600&fit=crop"
               alt="Hollow Knight" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -660,7 +669,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Hollow Knight</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Hollow Knight</a></h3>
             <p class="text-gv-muted text-xs mb-2">2017</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -679,7 +688,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=600&fit=crop"
               alt="The Witcher 3" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -697,7 +707,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">The Witcher 3</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">The Witcher 3</a></h3>
             <p class="text-gv-muted text-xs mb-2">2015</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -716,7 +726,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1556438064-2d7646166914?w=400&h=600&fit=crop" alt="Sekiro"
               class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -734,7 +745,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Sekiro: Shadows Die Twice</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Sekiro: Shadows Die Twice</a></h3>
             <p class="text-gv-muted text-xs mb-2">2019</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -753,7 +764,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?w=400&h=600&fit=crop"
               alt="Dark Souls III" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -771,7 +783,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Dark Souls III</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Dark Souls III</a></h3>
             <p class="text-gv-muted text-xs mb-2">2016</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -790,7 +802,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1519669556878-63bdad8a1a49?w=400&h=600&fit=crop"
               alt="Disco Elysium" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -808,7 +821,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Disco Elysium</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Disco Elysium</a></h3>
             <p class="text-gv-muted text-xs mb-2">2019</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -827,7 +840,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1542332213-31f87348057f?w=400&h=600&fit=crop" alt="Celeste"
               class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -845,7 +859,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Celeste</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Celeste</a></h3>
             <p class="text-gv-muted text-xs mb-2">2018</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -864,7 +878,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=400&h=600&fit=crop"
               alt="Stardew Valley" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors">
               <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -882,7 +897,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Stardew Valley</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Stardew Valley</a></h3>
             <p class="text-gv-muted text-xs mb-2">2016</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -901,7 +916,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1585620385456-4759f9b5c7d9?w=400&h=600&fit=crop"
               alt="Persona 5 Royal" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -919,7 +935,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Persona 5 Royal</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Persona 5 Royal</a></h3>
             <p class="text-gv-muted text-xs mb-2">2020</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -938,7 +954,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1614294149010-950b698f72c0?w=400&h=600&fit=crop"
               alt="Ghost of Tsushima" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -956,7 +973,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Ghost of Tsushima</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Ghost of Tsushima</a></h3>
             <p class="text-gv-muted text-xs mb-2">2020</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -975,7 +992,8 @@
           <div class="relative aspect-[3/4]">
             <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=400&h=600&fit=crop"
               alt="Resident Evil Village" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gv-card via-transparent to-transparent pointer-events-none"></div>
+            <a href="detalle.html" class="absolute inset-0 z-0" aria-label="Ver detalles"></a>
             <button
               class="absolute top-2 right-2 w-8 h-8 bg-gv-bg/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-red-500 transition-colors">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -993,7 +1011,7 @@
             </span>
           </div>
           <div class="p-3">
-            <h3 class="font-semibold text-white text-sm mb-0.5 truncate">Resident Evil Village</h3>
+            <h3 class="font-semibold text-white text-sm mb-0.5 truncate"><a href="detalle.html" class="hover:text-gv-accent transition-colors">Resident Evil Village</a></h3>
             <p class="text-gv-muted text-xs mb-2">2021</p>
             <a href="#"
               class="flex items-center justify-center gap-1.5 w-full bg-gv-steam hover:bg-gv-steam-hover text-white text-xs font-medium py-1.5 rounded-lg transition-colors">
@@ -1028,7 +1046,7 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
         <!-- Brand -->
         <div class="col-span-2 md:col-span-1">
-          <a href="#" class="flex items-center gap-2 mb-4">
+          <a href="index.html" class="flex items-center gap-2 mb-4">
             <div class="w-8 h-8 bg-gv-accent rounded-lg flex items-center justify-center">
               <svg class="w-5 h-5 text-gv-bg" fill="currentColor" viewBox="0 0 24 24">
                 <path
