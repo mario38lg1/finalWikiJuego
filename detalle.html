@@ -62,7 +62,30 @@
   <!-- Navbar -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-gv-bg/95 backdrop-blur-md border-b border-gv-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center justify-between h-16 lg:hidden">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+          <div
+            class="w-8 h-8 bg-gradient-to-br from-gv-accent to-emerald-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+            </svg>
+          </div>
+          <span class="text-lg font-bold text-white">GameVault</span>
+        </a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-toggle" class="p-2 rounded-lg hover:bg-gv-surface transition-colors">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center justify-between h-16">
         <!-- Logo -->
         <a href="index.html" class="flex items-center gap-2">
           <div
@@ -107,13 +130,49 @@
           </a>
         </div>
       </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-gv-border">
+        <div class="py-4 space-y-4">
+          <!-- Mobile Search -->
+          <div class="px-4">
+            <form action="busqueda.html" class="relative">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gv-text-muted" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input type="text" placeholder="Buscar juegos, generos, plataformas..."
+                class="w-full bg-gv-card border border-gv-border rounded-full pl-10 pr-4 py-2.5 text-sm text-gv-text placeholder-gv-text-muted focus:outline-none focus:border-gv-accent focus:ring-1 focus:ring-gv-accent transition-all">
+            </form>
+          </div>
+          
+          <!-- Mobile Actions -->
+          <div class="px-4 flex items-center justify-between">
+            <a href="login.html" class="relative flex items-center gap-2 text-gv-text-muted hover:text-gv-accent transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              <span class="text-sm">Mi Lista</span>
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-gv-accent text-gv-bg text-xs font-bold rounded-full flex items-center justify-center">3</span>
+            </a>
+            
+            <a href="perfil.html"
+              class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold text-sm ring-2 ring-gv-border hover:ring-gv-accent transition-all">
+              JP
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 
   <!-- Hero Section with Blurred Background -->
   <section class="pt-16 relative">
     <!-- Blurred Background Image -->
-    <div class="absolute inset-0 h-[500px] overflow-hidden">
+    <div class="absolute inset-0 h-[400px] sm:h-[500px] overflow-hidden">
       <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80" alt="Cyberpunk 2077 Background"
         class="w-full h-full object-cover blur-sm scale-105">
       <div class="absolute inset-0 bg-gradient-to-b from-gv-bg/60 via-gv-bg/80 to-gv-bg"></div>
@@ -121,25 +180,25 @@
     </div>
 
     <!-- Hero Content -->
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div class="flex flex-col gap-6 lg:gap-8 items-start">
         <!-- Game Cover -->
-        <div class="flex-shrink-0">
+        <div class="flex justify-center lg:flex-shrink-0">
           <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&h=450&fit=crop"
             alt="Cyberpunk 2077 Cover"
-            class="w-56 md:w-64 rounded-xl shadow-2xl shadow-black/50 border border-gv-border/50">
+            class="w-48 sm:w-56 lg:w-64 rounded-xl shadow-2xl shadow-black/50 border border-gv-border/50">
         </div>
 
         <!-- Game Info -->
-        <div class="flex-1 pt-4">
+        <div class="flex-1 text-center lg:text-left pt-0 lg:pt-4">
           <!-- Title and Year -->
           <div class="mb-4">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2 tracking-tight">Cyberpunk 2077</h1>
-            <p class="text-xl text-gv-text-muted">2020</p>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-2 tracking-tight">Cyberpunk 2077</h1>
+            <p class="text-lg lg:text-xl text-gv-text-muted">2020</p>
           </div>
 
           <!-- Genre Tags -->
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6">
             <span
               class="px-3 py-1 bg-gv-accent/20 text-gv-accent text-sm font-medium rounded-full border border-gv-accent/30">RPG</span>
             <span
@@ -153,21 +212,21 @@
           </div>
 
           <!-- Quick Actions -->
-          <div class="flex flex-wrap items-center gap-4">
+          <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-4">
             <!-- Rating Display -->
             <div
               class="flex items-center gap-2 bg-gv-card/80 backdrop-blur px-4 py-2 rounded-xl border border-gv-border">
-              <svg class="w-6 h-6 text-gv-yellow" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 lg:w-6 lg:h-6 text-gv-yellow" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
-              <span class="text-2xl font-bold text-white">4.8</span>
+              <span class="text-xl lg:text-2xl font-bold text-white">4.8</span>
               <span class="text-gv-text-muted text-sm">/5</span>
             </div>
 
             <!-- Add to List Button -->
             <button
-              class="flex items-center gap-2 bg-gv-card hover:bg-gv-border text-white px-5 py-2.5 rounded-xl border border-gv-border hover:border-gv-accent transition-all">
+              class="flex items-center justify-center gap-2 bg-gv-card hover:bg-gv-border text-white px-5 py-2.5 rounded-xl border border-gv-border hover:border-gv-accent transition-all w-full sm:w-auto">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
               </svg>
@@ -176,7 +235,7 @@
 
             <!-- Buy on Steam Button -->
             <a href="#"
-              class="flex items-center gap-2 bg-gv-steam hover:bg-gv-steam-hover text-white px-6 py-2.5 rounded-xl transition-all font-medium shadow-lg">
+              class="flex items-center justify-center gap-2 bg-gv-steam hover:bg-gv-steam-hover text-white px-6 py-2.5 rounded-xl transition-all font-medium shadow-lg w-full sm:w-auto">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95 0-5.52-4.48-10-10-10z" />
@@ -351,7 +410,7 @@
       <div class="lg:w-[30%] space-y-6 sticky top-24 self-start">
 
         <!-- Technical Info -->
-        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border">
+        <section class="bg-gv-card rounded-2xl p-4 sm:p-6 border border-gv-border">
           <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
             <svg class="w-5 h-5 text-gv-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -362,20 +421,20 @@
 
           <div class="space-y-4">
             <!-- Developer -->
-            <div class="flex justify-between items-start py-3 border-b border-gv-border">
-              <span class="text-gv-text-muted text-sm">Desarrolladora</span>
-              <span class="text-white text-sm font-medium text-right">CD Projekt Red</span>
+            <div class="flex justify-between items-start py-2 sm:py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-xs sm:text-sm">Desarrolladora</span>
+              <span class="text-white text-xs sm:text-sm font-medium text-right">CD Projekt Red</span>
             </div>
 
             <!-- Publisher -->
-            <div class="flex justify-between items-start py-3 border-b border-gv-border">
-              <span class="text-gv-text-muted text-sm">Distribuidora</span>
-              <span class="text-white text-sm font-medium text-right">CD Projekt</span>
+            <div class="flex justify-between items-start py-2 sm:py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-xs sm:text-sm">Distribuidora</span>
+              <span class="text-white text-xs sm:text-sm font-medium text-right">CD Projekt</span>
             </div>
 
             <!-- Platforms -->
-            <div class="flex justify-between items-start py-3 border-b border-gv-border">
-              <span class="text-gv-text-muted text-sm">Plataformas</span>
+            <div class="flex justify-between items-start py-2 sm:py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-xs sm:text-sm">Plataformas</span>
               <div class="flex flex-wrap gap-1 justify-end max-w-[60%]">
                 <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">PC</span>
                 <span class="px-2 py-0.5 bg-gv-bg text-xs text-gv-text rounded">PS5</span>
@@ -386,20 +445,20 @@
             </div>
 
             <!-- Release Date -->
-            <div class="flex justify-between items-start py-3 border-b border-gv-border">
-              <span class="text-gv-text-muted text-sm">Fecha de lanzamiento</span>
-              <span class="text-white text-sm font-medium">10 Dic 2020</span>
+            <div class="flex justify-between items-start py-2 sm:py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-xs sm:text-sm">Fecha de lanzamiento</span>
+              <span class="text-white text-xs sm:text-sm font-medium">10 Dic 2020</span>
             </div>
 
             <!-- Average Playtime -->
-            <div class="flex justify-between items-start py-3 border-b border-gv-border">
-              <span class="text-gv-text-muted text-sm">Tiempo medio de juego</span>
-              <span class="text-white text-sm font-medium">60+ horas</span>
+            <div class="flex justify-between items-start py-2 sm:py-3 border-b border-gv-border">
+              <span class="text-gv-text-muted text-xs sm:text-sm">Tiempo medio de juego</span>
+              <span class="text-white text-xs sm:text-sm font-medium">60+ horas</span>
             </div>
 
             <!-- Age Rating -->
-            <div class="flex justify-between items-start py-3">
-              <span class="text-gv-text-muted text-sm">Clasificacion</span>
+            <div class="flex justify-between items-start py-2 sm:py-3">
+              <span class="text-gv-text-muted text-xs sm:text-sm">Clasificacion</span>
               <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded border border-red-500/30">PEGI
                 18</span>
             </div>
@@ -425,13 +484,13 @@
         </section>
 
         <!-- Similar Games -->
-        <section class="bg-gv-card rounded-2xl p-6 border border-gv-border">
+        <section class="bg-gv-card rounded-2xl p-4 sm:p-6 border border-gv-border">
           <h2 class="text-lg font-bold text-white mb-4">Juegos Similares</h2>
           <div class="space-y-4">
             <a href="#" class="flex items-center gap-3 group">
               <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=80&h=100&fit=crop"
                 alt="The Witcher 3"
-                class="w-14 h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
+                class="w-12 h-16 sm:w-14 sm:h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
               <div>
                 <p class="text-white text-sm font-medium group-hover:text-gv-accent transition-colors">The Witcher 3</p>
                 <p class="text-gv-text-muted text-xs">RPG, Accion</p>
@@ -439,7 +498,7 @@
             </a>
             <a href="#" class="flex items-center gap-3 group">
               <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=80&h=100&fit=crop" alt="Deus Ex"
-                class="w-14 h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
+                class="w-12 h-16 sm:w-14 sm:h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
               <div>
                 <p class="text-white text-sm font-medium group-hover:text-gv-accent transition-colors">Deus Ex: Mankind
                   Divided</p>
@@ -448,7 +507,7 @@
             </a>
             <a href="#" class="flex items-center gap-3 group">
               <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=80&h=100&fit=crop" alt="Watch Dogs"
-                class="w-14 h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
+                class="w-12 h-16 sm:w-14 sm:h-18 rounded-lg object-cover border border-gv-border group-hover:border-gv-accent transition-colors">
               <div>
                 <p class="text-white text-sm font-medium group-hover:text-gv-accent transition-colors">Watch Dogs:
                   Legion</p>
@@ -461,13 +520,35 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-gv-border mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center gap-2">
-          <div
-            class="w-8 h-8 bg-gradient-to-br from-gv-accent to-emerald-600 rounded-lg flex items-center justify-center">
+  <!-- Mobile Menu JavaScript -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuToggle && mobileMenu) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        
+        // Toggle icon between hamburger and X
+        const icon = mobileMenuToggle.querySelector('svg path');
+        if (mobileMenu.classList.contains('hidden')) {
+          icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Hamburger
+        } else {
+          icon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // X
+        }
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+          const icon = mobileMenuToggle.querySelector('svg path');
+          icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Hamburger
+        }
+      });
+    }
+  </script>
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
@@ -475,7 +556,7 @@
           </div>
           <span class="text-lg font-bold text-white">GameVault</span>
         </div>
-        <p class="text-gv-text-muted text-sm">2024 GameVault. Tu biblioteca de videojuegos.</p>
+        <p class="text-gv-text-muted text-sm">2026 Mario López. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
